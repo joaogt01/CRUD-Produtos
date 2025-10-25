@@ -1,16 +1,18 @@
-🛍️ CRUD de Produtos em Java
+## 🛍️ CRUD de Produtos em Java
 
 💡 Um sistema simples de cadastro de produtos em Java puro, com persistência em arquivo .txt, desenvolvido para fins educacionais e acadêmicos.
 Projeto organizado em camadas Model - Service - View, aplicando os princípios básicos de POO e boas práticas de arquitetura.
-
-🚀 Funcionalidades
-Função	Descrição
-🆕 Cadastrar	Adiciona um novo produto com nome, preço e quantidade
-📋 Listar	Exibe todos os produtos cadastrados
-✏️ Atualizar	Permite editar um produto existente
-🗑️ Remover	Exclui um produto da lista e do arquivo
-💾 Persistir	Salva automaticamente os dados no arquivo produtos.txt
-🧠 Tecnologias Utilizadas
+---
+## 🚀 Funcionalidades
+| Função | Descrição |
+|---------|-----------|
+| 🆕 Cadastrar	 | Adiciona um novo produto com nome, preço e quantidade |
+| 📋 Listar	| Exibe todos os produtos cadastrados |
+| ✏️ Atualizar |	Permite editar um produto existente | 
+| 🗑️ Remover	 | Exclui um produto da lista e do arquivo |
+| 💾 Persistir	| Salva automaticamente os dados no arquivo produtos.txt |
+---
+## 🧠 Tecnologias Utilizadas
 
 ☕ Java 17+
 
@@ -20,7 +22,9 @@ Função	Descrição
 
 🧪 Testes manuais sem JUnit
 
-🏗️ Estrutura do Projeto
+
+---
+## 🏗️ Estrutura do Projeto
 ```bash
 src/
  ├── model/
@@ -33,37 +37,35 @@ src/
  │    └── TesteProdutoService.java
  └── App.java
 ```
-🧩 Explicação das Camadas
+---
+## 🧩 Explicação das Camadas
 
 
-Camada	Responsabilidade	Arquivo
+| Camada	| Responsabilidade |	Arquivo |
+|---------|-----------|-----------|
+|🧱 Model	 | Representa o produto com atributos e métodos |	Produto.java |
+|⚙️ Service	 | Gerencia a lista de produtos e salva no arquivo |	ProdutoService.java |
+|🖥️ View | 	Exibe o menu e interage com o usuário |	ProdutoView.java |
+|🎬 App	| Inicia o sistema	| App.java |
+|🧪 Testes	| Valida as funcionalidades |	TesteProdutoService.java |
 
-🧱 Model	Representa o produto com atributos e métodos	Produto.java
+---
 
-
-⚙️ Service	Gerencia a lista de produtos e salva no arquivo	ProdutoService.java
-
-
-🖥️ View	Exibe o menu e interage com o usuário	ProdutoView.java
-
-
-🎬 App	Inicia o sistema	App.java
-
-
-🧪 Testes	Valida as funcionalidades	TesteProdutoService.java
-
-
-💾 Persistência dos Dados
+## 💾 Persistência dos Dados:
 
 Os produtos são armazenados no arquivo produtos.txt, no formato:
 
 nome;preco;quantidade
 
 
-📁 Exemplo:
+## 📁 Exemplo:
 
 Arroz;5.50;10
+
+
 Feijão;8.00;5
+
+
 Café;7.00;3
 
 
@@ -73,17 +75,20 @@ Gravados após cada operação (cadastro, edição, exclusão);
 
 Carregados automaticamente na inicialização do programa.
 
-🧪 Testes (Sem JUnit)
+---
+
+## 🧪 Testes (Sem JUnit)
 
 Os testes são realizados no arquivo TesteProdutoService.java, simulando os principais casos do CRUD.
 Eles exibem o resultado diretamente no terminal.
 
-🔍 Casos de Teste
-Teste	Objetivo	Resultado Esperado
-✅ testarCadastro()	Verifica se o produto é adicionado corretamente	Passou
-✅ testarAtualizacao()	Confirma a alteração dos dados	Passou
-✅ testarRemocao()	Garante a exclusão correta	Passou
-✅ testarPersistencia()	Testa leitura e gravação no arquivo	Passou
+## 🔍 Casos de Teste
+|Teste |	Objetivo	| Resultado esperado|
+|-----------|-----------|-----------|
+| ✅ testarCadastro()	| Verifica se o produto é adicionado corretamente |	Passou |
+| ✅ testarAtualizacao()	| Confirma a alteração dos dados	| Passou |
+| ✅ testarRemocao()	| Garante a exclusão correta	| Passou |
+| ✅ testarPersistencia() | Testa leitura e gravação no arquivo |	Passou | 
 
 📋 Saída esperada no console:
 ```bash
@@ -145,14 +150,20 @@ Estrutura de controle (switch, loops)
 
 Modularização e reuso de código
 
-👨‍💻 Autor
+---
+
+## 👨‍💻 Autor
 
 João Victor
 📘 Estudante de Sistemas de Informação — UPE
+
+
 💬 Projeto acadêmico para estudo de Java, POO e persistência de dados.
+
 🌐 Desenvolvido com foco em aprendizado e boas práticas.
 
-🏁 Licença
+
+## 🏁 Licença
 
 Este projeto é de uso livre para fins educacionais.
 Sinta-se à vontade para copiar, modificar e aprimorar o código.
