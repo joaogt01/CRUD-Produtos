@@ -9,11 +9,17 @@ import java.util.List;
 public class ProdutoService {
 
     private List<Produto> produtos = new ArrayList<>();
-    private final String ARQUIVO = "produtos.txt";
+    private String ARQUIVO = "produtos.txt";
 
-    public ProdutoService(){
+    public ProdutoService() {
+        this("produtos.txt");
+    }
+
+    public ProdutoService(String arquivo){
+        this.ARQUIVO = arquivo;
         carregarDoArquivo();
     }
+
 
     public void cadastrar(String nome, double preco, int quantidade) {
         produtos.add(new Produto(nome, preco, quantidade));
