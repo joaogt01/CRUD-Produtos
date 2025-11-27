@@ -58,7 +58,6 @@ public class ProdutoService {
                 escritor.newLine();
             }
         }catch (IOException e){
-            System.out.println("Erro ao salvar no arquivo: " + e.getMessage());
         }
     }
 
@@ -68,14 +67,20 @@ public class ProdutoService {
         try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String linha;
             while ((linha = reader.readLine()) != null){
+                if (linha.trim().isEmpty()) continue;
+
                 String[] dados = linha.split(";");
+
+                if (dados.length < 3){
+                    continue;
+                }
+
                 String nome = dados[0];
                 double preco = Double.parseDouble(dados[1]);
                 int quantidade = Integer.parseInt(dados[2]);
                 produtos.add(new Produto(nome, preco, quantidade));
             }
         }catch (IOException e){
-            System.out.println("Falha ao ler o arquivo: " + e.getMessage());
         }
     }
 }
