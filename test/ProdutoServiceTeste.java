@@ -3,26 +3,28 @@ import service.ProdutoService;
 import model.Produto;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class ProdutoServiceTeste {
 
     private static final String ARQUIVO_TESTE = "produtos_test.txt";
     private ProdutoService service;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IOException{
         File file = new File(ARQUIVO_TESTE);
         if (file.exists()) {
             file.delete();
         }
-        service = new ProdutoService(ARQUIVO_TESTE);
+        service = new ProdutoService(ARQUIVO_TESTE, false);
     }
 
     @Test
-    void testeCadastrar() {
+    void testeCadastrar() throws IOException {
         service.cadastrar("Festim", 2.5, 10);
 
         List<Produto> lista = service.listar();
@@ -34,7 +36,7 @@ public class ProdutoServiceTeste {
     }
 
     @Test
-    void testeListar() {
+    void testeListar() throws IOException {
         service.cadastrar("Jujuba", 1, 1);
         service.cadastrar("chapeu", 2, 2);
 
@@ -44,7 +46,7 @@ public class ProdutoServiceTeste {
     }
 
     @Test
-    void testeAtualizarValido() {
+    void testeAtualizarValido() throws IOException {
         service.cadastrar("goiabada", 1, 1);
 
         boolean ok = service.atualizar(0, "Novo", 15.0, 50);
@@ -56,13 +58,13 @@ public class ProdutoServiceTeste {
     }
 
     @Test
-    void testeAtualizarInvalido() {
+    void testeAtualizarInvalido() throws IOException {
         boolean ok = service.atualizar(5, "X", 1, 1);
         assertFalse(ok);
     }
 
     @Test
-    void testeDeletarValido() {
+    void testeDeletarValido() throws IOException {
         service.cadastrar("teste1", 1, 1);
         service.cadastrar("teste", 2, 2);
 
@@ -74,18 +76,20 @@ public class ProdutoServiceTeste {
     }
 
     @Test
-    void testeDeletarInvalido() {
+    void testeDeletarInvalido() throws IOException {
         boolean deletar = service.deletar(10);
         assertFalse(deletar);
     }
 
     @Test
-    void testeCarregarDoArquivo() {
+    void testeCarregarDoArquivo() throws IOException {
         service.cadastrar("teste", 1, 1);
 
-        ProdutoService novo = new ProdutoService(ARQUIVO_TESTE);
-
-        assertEquals(1, novo.listar().size());
-        assertEquals("teste", novo.listar().get(0).getNome());
+        ProdutoService novoService = new ProdutoService(ARQUIVO_TESTE, true);
+        List<Produto> lista = novoService.listar();
+        assertEquals(1, lista.size());
+        assertEquals("teste", lista.get(0).getNome());
+        assertEquals(1.0, lista.get(0).getPreco());
+        assertEquals(1, lista.get(0).getQuantidade());
     }
 }

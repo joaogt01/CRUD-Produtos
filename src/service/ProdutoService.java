@@ -21,7 +21,6 @@ public class ProdutoService {
         if (carregar){
             carregarDoArquivo();
         }
-        carregarDoArquivo();
     }
 
 
@@ -73,7 +72,8 @@ public class ProdutoService {
 
         String linha;
         while ((linha = reader.readLine()) != null){
-            if (linha.trim().isEmpty()) continue;
+            linha = linha.trim();
+            if (linha.isEmpty()) continue;
 
             String[] dados = linha.split(";");
 
