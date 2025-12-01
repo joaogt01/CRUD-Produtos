@@ -66,17 +66,17 @@ public class ProdutoServiceTeste {
         service.cadastrar("teste1", 1, 1);
         service.cadastrar("teste", 2, 2);
 
-        boolean ok = service.deletar(0);
+        boolean deletar = service.deletar(0);
 
-        assertTrue(ok);
+        assertTrue(deletar);
         assertEquals(1, service.listar().size());
         assertEquals("teste", service.listar().get(0).getNome());
     }
 
     @Test
     void testeDeletarInvalido() {
-        boolean ok = service.deletar(10);
-        assertFalse(ok);
+        boolean deletar = service.deletar(10);
+        assertFalse(deletar);
     }
 
     @Test

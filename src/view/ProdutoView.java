@@ -2,13 +2,31 @@ package view;
 
 import model.Produto;
 import service.ProdutoService;
+
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProdutoView {
 
-    private ProdutoService service = new ProdutoService();
+    private ProdutoService service;
     private Scanner scanner = new Scanner(System.in);
+
+    public ProdutoView() {
+
+        try {
+            service = new ProdutoService();
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar arquivo de produtos. Criando lista vazia...");
+            try {
+                service = new ProdutoService("produtos.txt", false);
+            } catch (IOException ex) {
+                System.out.println("Erro grave ao iniciar o serviço");
+            }
+        }
+    }
+
 
     public void exibirMenu() {
         while (true) {
@@ -50,17 +68,20 @@ public class ProdutoView {
     }
 
     private void cadastrar() {
-        System.out.print("Nome do produto: ");
-        String nome = scanner.nextLine();
+        try {
+            System.out.print("Nome do produto: ");
+            String nome = scanner.nextLine();
 
-        System.out.print("Preço: ");
-        double preco = Double.parseDouble(scanner.nextLine());
+            System.out.print("Preço: ");
+            double preco = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Quantidade: ");
-        int quantidade = Integer.parseInt(scanner.nextLine());
+            System.out.print("Quantidade: ");
+            int quantidade = Integer.parseInt(scanner.nextLine());
 
-        service.cadastrar(nome, preco, quantidade);
-        System.out.println("Produto cadastrado!");
+            service.cadastrar(nome, preco, quantidade);
+            System.out.println("Produto cadastrado!");
+        } catch (IOException e) {System.out.println("Erro ao salvar produto: " + e.getMessage());
+        }
     }
 
     private void listar() {
@@ -80,35 +101,43 @@ public class ProdutoView {
     private void atualizar() {
         listar();
 
-        System.out.print("Digite o ID do produto a ser atualizado: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        try {
+            System.out.print("Digite o ID do produto a ser atualizado: ");
+            int id = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Novo nome: ");
-        String nome = scanner.nextLine();
+            System.out.print("Novo nome: ");
+            String nome = scanner.nextLine();
 
-        System.out.print("Novo preço: ");
-        double preco = Double.parseDouble(scanner.nextLine());
+            System.out.print("Novo preço: ");
+            double preco = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Nova quantidade: ");
-        int quantidade = Integer.parseInt(scanner.nextLine());
+            System.out.print("Nova quantidade: ");
+            int quantidade = Integer.parseInt(scanner.nextLine());
 
-        if (service.atualizar(id, nome, preco, quantidade)) {
-            System.out.println("Produto atualizado!");
-        } else {
-            System.out.println("ID inválido!");
+            if (service.atualizar(id, nome, preco, quantidade)) {
+                System.out.println("Produto atualizado!");
+            } else {
+                System.out.println("ID inválido!");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar o arquivo: " + e.getMessage());
         }
     }
 
     private void deletar() {
         listar();
 
-        System.out.print("Digite o ID do produto a ser deletado: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        try {
+            System.out.print("Digite o ID do produto a ser deletado: ");
+            int id = Integer.parseInt(scanner.nextLine());
 
-        if (service.deletar(id)) {
-            System.out.println("Produto removido!");
-        } else {
-            System.out.println("ID inválido!");
+            if (service.deletar(id)) {
+                System.out.println("Produto removido!");
+            } else {
+                System.out.println("ID inválido!");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao deletar no arquivo: " + e.getMessage());
         }
     }
 }
